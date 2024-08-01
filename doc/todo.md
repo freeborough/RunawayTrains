@@ -1,0 +1,43 @@
+# Runaway Trains: TODO
+
+## Source Control
+
+Need to setup git/GitHub.
+
+## Track Directions
+
+We need to have straight and corner pieces oriented correctly.  Update the models so we can see
+direction (still using primitives, of course).
+
+## Train
+
+Have a train following the tracks.  Ideally if we can use a Path within each track piece and follow
+that, it gives us lots of flexibility in the future for different types of track.
+
+## Game Manager
+
+Create a game manager that can be used to spawn players and track game state.
+Move the quit check to here.  And probably tick actually, then have a signal to trigger the tick for
+all players.
+
+## Level Boundry
+
+Make the level a correct size, then add some area3d's that we can collide with at the edges.
+
+## Multiplayer
+
+Add support for up to ten (10) players.  Just hard-code the bindings for now, we can look at
+dynamically binding them later.
+
+## Pickups
+
+How do we want to do pickups?  Track run directly over like Snake?  Or pass on one side or the other
+and pickup with the train?  Have a range or not?
+
+I like the idea of having range such that you'll then run alongside and they'll join the train.  It
+also opens up some options regarding stations as needing to be directly on them/adjacent makes them
+very easy to block off.  Something we'll have to experiment with, so build the code to allow options
+here.
+
+I also like the idea of a powerup that will increase your pickup radius, or something that will
+lower your opponent's pickup radius.
