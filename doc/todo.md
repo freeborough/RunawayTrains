@@ -1,9 +1,5 @@
 # Runaway Trains: TODO
 
-## Source Control
-
-Need to setup git/GitHub.
-
 ## Track Directions
 
 We need to have straight and corner pieces oriented correctly.  Update the models so we can see
