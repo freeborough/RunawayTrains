@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GameManager="*res://game_manager.gd"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 p1_left={

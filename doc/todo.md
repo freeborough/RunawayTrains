@@ -5,18 +5,9 @@
 Have a train following the tracks.  Ideally if we can use a Path within each track piece and follow
 that, it gives us lots of flexibility in the future for different types of track.
 
-## Game Manager
-
-Move the quit check to here.
-
 ## Level Boundry
 
 Make the level a correct size, then add some area3d's that we can collide with at the edges.
-
-## Multiplayer
-
-Add support for up to ten (10) players.  Just hard-code the bindings for now, we can look at
-dynamically binding them later.
 
 ## Pickups
 
