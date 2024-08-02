@@ -7,9 +7,7 @@ that, it gives us lots of flexibility in the future for different types of track
 
 ## Game Manager
 
-Create a game manager that can be used to spawn players and track game state.
-Move the quit check to here.  And probably tick actually, then have a signal to trigger the tick for
-all players.
+Move the quit check to here.
 
 ## Level Boundry
 

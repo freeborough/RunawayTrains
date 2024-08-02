@@ -1,3 +1,4 @@
+class_name Player
 extends Node3D
 
 # Amount of time in seconds between ticks (movement).
@@ -16,8 +17,8 @@ const DEFAULT_TICK_RATE : float = 0.5
 @export var track_size : float = 1.0
 
 # The scenes to use when laying pieces of track.
-var track_straight : PackedScene = load("res://track_straight.tscn")
-var track_corner : PackedScene = load("res://track_corner.tscn")
+var track_straight : PackedScene = preload("res://track_straight.tscn")
+var track_corner : PackedScene = preload("res://track_corner.tscn")
 
 # This is where we'll be trying to face on the next tick.
 var next_facing: Vector2 = facing
@@ -40,17 +41,10 @@ var collision_count : int = 0
 var is_alive : bool = true
 
 func _process(delta):
-	check_for_quit()
 	if is_alive:
 		handle_player_input()
 		move_collider()
 		move_when_ready(delta)
-
-
-func check_for_quit():
-	# TODO: Replace with a proper game menu at some point.
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 
 func handle_player_input():
