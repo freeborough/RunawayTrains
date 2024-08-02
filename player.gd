@@ -2,7 +2,7 @@ class_name Player
 extends Node3D
 
 # Amount of time in seconds between ticks (movement).
-const DEFAULT_TICK_RATE : float = 0.5
+const DEFAULT_TICK_RATE : float = 0.25
 
 # The internal handle used by this player, so we can map controls accordingly.
 @export var player_handle : String = "p1"
@@ -32,7 +32,7 @@ var track : Array[Node3D] = []
 
 # The maximum track length.  Depending on the game rules, players may need to
 # collect items in-game to increase their track (and therefore train) size.
-var track_max_length : int = 10
+var track_max_length : int = 1000
 
 # Count of the number of collisions in the next track location.
 var collision_count : int = 0

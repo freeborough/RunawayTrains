@@ -1,2 +1,5 @@
+res://track_straight.tscn
+res://track_corner.tscn
 res://world.tscn
-res://doc/todo.md
+res://player.tscn
+res://player.gd
