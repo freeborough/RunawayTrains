@@ -1,5 +1,5 @@
-Path3D
 MeshInstance3D
+Path3D
 StaticBody3D
 CollisionShape3D
 Area3D

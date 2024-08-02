@@ -83,28 +83,75 @@ func move():
 	position.x += round(next_facing.x * track_size)
 	position.z += round(next_facing.y * track_size)
 	
-	# Remove the last piece of track.
+	remove_last_track()
+	maybe_swap_for_corner()
+	place_next_track()
+	
+	# Update our facing to our new facing.
+	facing = next_facing
+
+
+func remove_last_track():
 	if track.size() >= track_max_length && track.size() > 1:
 		track[0].queue_free()
-		track.remove_at(0)
-	
-	# Replace the previous piece of track with a corner if we've turned.
+		track.remove_at(0)	
+
+
+func maybe_swap_for_corner():
+	# We only need to swap for a corner if we're turning.
 	if facing != next_facing and track.size() > 0:
-		var previous_position = track[-1].position
+		# Record the position of the current track piece then delete it.
+		var current_position = track[-1].position
 		track[-1].queue_free()
-		var previous_track = track_corner.instantiate() as Node3D
-		$Track.add_child(previous_track)
-		track[-1] = previous_track
-		previous_track.position = previous_position
+		
+		# Add the replacement piece of track.
+		var current_track = track_corner.instantiate() as Node3D
+		$Track.add_child(current_track)
+		track[-1] = current_track
+		current_track.position = current_position
+		
+		# Rotate the corner piece so it correctly links the two adjacent track pieces.
+		if track.size() > 1:
+			rotate_to_join(current_track, track[-2].position, position)
+
+
+func rotate_to_join(node: Node3D, previous: Vector3, next: Vector3):
+	var current : Vector3 = node.position
 	
-	# Place the next piece of track.
+	# Going UP from going left or right.
+	if next.z < current.z:
+		if previous.x > current.x:
+			node.rotate_y(deg_to_rad(90))
+		else:
+			node.rotate_y(deg_to_rad(180))
+	
+	# Going DOWN from going left or right.
+	if next.z > current.z:
+		if previous.x < current.x:
+			node.rotate_y(deg_to_rad(-90))
+	
+	# Going LEFT from going up or down.
+	if next.x < current.x:
+		if previous.z > current.z:
+			node.rotate_y(deg_to_rad(-90))
+		else:
+			node.rotate_y(deg_to_rad(180))
+	
+	# Going RIGHT from going up or down.
+	if next.x > current.x:
+		if previous.z < current.z:
+			node.rotate_y(deg_to_rad(90))
+
+
+func place_next_track():
 	var new_track = track_straight.instantiate() as Node3D
 	$Track.add_child(new_track)
 	track.append(new_track)
 	new_track.position = position
 	
-	# Update our facing to our new facing.
-	facing = next_facing
+	# If we're going to face in the Y axis, rotate the track accordingly.
+	if abs(next_facing.y) > 0.1:
+		new_track.rotate_y(deg_to_rad(90))
 
 
 func rotate_next_facing(degrees: int):
