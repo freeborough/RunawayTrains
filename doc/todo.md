@@ -1,10 +1,5 @@
 # Runaway Trains: TODO
 
-## Track Directions
-
-We need to have straight and corner pieces oriented correctly.  Update the models so we can see
-direction (still using primitives, of course).
-
 ## Train
 
 Have a train following the tracks.  Ideally if we can use a Path within each track piece and follow
