@@ -34,16 +34,12 @@ var track : Array[Node3D] = []
 # collect items in-game to increase their track (and therefore train) size.
 var track_max_length : int = 1000
 
-# Count of the number of collisions in the next track location.
-var collision_count : int = 0
-
 # Wether or not the player is currently alive or not.
 var is_alive : bool = true
 
 func _process(delta):
 	if is_alive:
 		handle_player_input()
-		move_collider()
 		move_when_ready(delta)
 
 
@@ -54,22 +50,14 @@ func handle_player_input():
 		rotate_next_facing(90)
 
 
-func move_collider():
-	$NextLocation.position.x = round(next_facing.x * track_size)
-	$NextLocation.position.z = round(next_facing.y * track_size)
-
-
 func move_when_ready(delta: float):
 	# Use the delta time to deterine if we're going to make another move yet or not.
 	time_since_last_tick += delta
 	if time_since_last_tick >= tick_rate:
 		time_since_last_tick -= tick_rate
 		
-		# Check if we've collided with something, if so mark us as dead, otherwse continue.
-		if collision_count > 0:
-			is_alive = false
-		else:
-			move()
+		# TODO: Check if we've collided with something, if so mark us as dead, otherwse continue.
+		move()
 
 
 func move():
@@ -152,11 +140,3 @@ func rotate_next_facing(degrees: int):
 	var potential_next_facing = next_facing.rotated(deg_to_rad(degrees))
 	if facing.distance_to(potential_next_facing) < 1.9:
 		next_facing = potential_next_facing
-
-
-func _on_next_location_body_entered(_body):
-	collision_count += 1
-
-
-func _on_next_location_body_exited(_body):
-	collision_count -= 1
