@@ -1,5 +1,22 @@
 # Runaway Trains: TODO
 
+## Redo Collision Detection
+
+Use ShapeCast3D instead of our janky method!  It's just the proper, simpler way to do it, but should
+also fix the bend on a straight bug.
+
+## Track to Corner Immediately
+
+At the moment the track corner is placed after the next straight piece is, retroactively fixing the
+previous piece of track.  However, it will be a much better user experience, to change it as soon as
+the facing is changed.
+
+## Initialise Track
+
+We need to be able to initialise the track to have more than one piece at the start.  Maybe making a
+'place track at' function or similar would both make this easier and share the logic between this
+and elsewhere.
+
 ## Train
 
 Have a train following the tracks.  Ideally if we can use a Path within each track piece and follow
